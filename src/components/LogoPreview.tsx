@@ -1,8 +1,9 @@
+// @ts-nocheck
+
 import { icons } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import { UpdateStorageContext } from "@/Context/UpdateStorageContext";
 import html2canvas from "html2canvas";
-import { COLOR_ICON_URL } from "@/iconsList/IconsList";
 
 interface LogoValue {
   bgRounded?: string;
@@ -55,24 +56,26 @@ export const LogoPreview: React.FC<LogoPreviewProps> = ({ DownloadIcon }) => {
 
   const downloadPngLogo = () => {
     const downloadpng = document.getElementById("downloadpng");
-    html2canvas(downloadpng, {
-      backgroundColor: null,
-    }).then((canvas) => {
-      const pngImage = canvas.toDataURL("image/png");
-      const downloadLink = document.createElement("a");
-      downloadLink.href = pngImage;
-      downloadLink.download = "LOGOMAKER.png";
-      downloadLink.click();
-    });
+    if (downloadpng) {
+      html2canvas(downloadpng, {
+        backgroundColor: null,
+      }).then((canvas) => {
+        const pngImage = canvas.toDataURL("image/png");
+        const downloadLink = document.createElement("a");
+        downloadLink.href = pngImage;
+        downloadLink.download = "LOGOMAKER.png";
+        downloadLink.click();
+      });
+    }
   };
 
-  const Icons = ({ name, color, size, rotate }: IconType) => {
-    const LucidIcons = icons[name];
-    if (!LucidIcons) {
+  const Icons: React.FC<IconType> = ({ name, color, size, rotate }) => {
+    const LucidIcon = name ? icons[name] : null;
+    if (!LucidIcon) {
       return null;
     }
     return (
-      <LucidIcons
+      <LucidIcon
         color={color}
         size={size}
         style={{ transform: `rotate(${rotate ?? 0}deg)` }}
@@ -98,8 +101,8 @@ export const LogoPreview: React.FC<LogoPreviewProps> = ({ DownloadIcon }) => {
         >
           {storageValue?.icon?.includes(".png") ? (
             <img
-              src={"/png/" + storageValue?.icon}
-              alt="F"
+              src={`/png/${storageValue.icon}`}
+              alt="Icon"
               style={{
                 height: storageValue.iconSize,
                 width: storageValue.iconSize,

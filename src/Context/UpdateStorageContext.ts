@@ -1,5 +1,3 @@
-// UpdateStorageContext.ts
-
 import React from "react";
 
 interface UpdateStorageContextType {

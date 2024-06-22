@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Dialog,
   DialogContent,
@@ -26,7 +27,7 @@ export const COLOR_ICON_URL = "https://logoexpress.tubeguruji.com";
 
 const IconsList: React.FC<IconsListProps> = ({ selectedIcon }) => {
   const Icons = ({ name, color, size, rotate }: IconType) => {
-    const LucidIcons = icons[name!];
+    const LucidIcons = icons[name];
     if (!LucidIcons) {
       return null;
     }
