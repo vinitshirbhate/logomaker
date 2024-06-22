@@ -42,6 +42,10 @@ const ControlPanel = () => {
   return (
     <div>
       <label>Icon</label>
+      {/* {icon?.includes(".png") ? (
+        <img src={"https://logoexpress.tubeguruji.com/png/" + icon} />
+      ) : (
+      )} */}
       <IconsList selectedIcon={(icon: string) => setIcon(icon)} />
       <div>
         <label className="p-2 flex justify-between items-center">

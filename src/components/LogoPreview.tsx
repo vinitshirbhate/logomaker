@@ -2,6 +2,7 @@ import { icons } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import { UpdateStorageContext } from "@/Context/UpdateStorageContext";
 import html2canvas from "html2canvas";
+import { COLOR_ICON_URL } from "@/iconsList/IconsList";
 
 interface LogoValue {
   bgRounded?: string;
@@ -95,12 +96,23 @@ export const LogoPreview: React.FC<LogoPreviewProps> = ({ DownloadIcon }) => {
             background: storageValue?.bgColor ?? "transparent",
           }}
         >
-          <Icons
-            name={storageValue?.icon}
-            color={storageValue?.iconColor}
-            size={storageValue?.iconSize}
-            rotate={storageValue?.iconRotate}
-          />
+          {storageValue?.icon?.includes(".png") ? (
+            <img
+              src={"/png/" + storageValue?.icon}
+              alt="F"
+              style={{
+                height: storageValue.iconSize,
+                width: storageValue.iconSize,
+              }}
+            />
+          ) : (
+            <Icons
+              name={storageValue?.icon}
+              color={storageValue?.iconColor}
+              size={storageValue?.iconSize}
+              rotate={storageValue?.iconRotate}
+            />
+          )}
         </div>
       </div>
     </div>
